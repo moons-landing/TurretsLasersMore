@@ -1,0 +1,30 @@
+plugins {
+    id 'application'
+    id 'java'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+application {
+    mainClassName = "io.github.moonslanding.tlm.TLMGame"
+}
+
+// Semantic versioning
+version = '0.1.0'
+
+// Dependencies
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
