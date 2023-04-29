@@ -22,10 +22,12 @@ public class SpritedGameObject extends GameObject implements IRenderable {
     }
 
     @Override
-    public void render(Graphics graphics) {
+    public void render(WrappedGraphic graphics) {
+        Graphics graphic = graphics.getGraphic();
         if (sprite != null) {
             BufferedImage tintApplied = applyTint(sprite.getTexture());
-            graphics.drawImage(tintApplied, getX(), getY(), null);
+            BufferedImage scaled = applyZoomFactor(tintApplied, graphics.getZoomFactor()); // apply zoom factor here
+            graphic.drawImage(scaled, getX(), getY(), null);
         }
     }
 
@@ -38,13 +40,26 @@ public class SpritedGameObject extends GameObject implements IRenderable {
     }
 
     private BufferedImage applyTint(BufferedImage source) {
+
         BufferedImage tinted = new BufferedImage(source.getWidth(), source.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = tinted.createGraphics();
         g.drawImage(source, 0, 0, null);
         g.setComposite(AlphaComposite.SrcAtop);
         g.setColor(tint);
-        g.fillRect(0, 0, source.getWidth(), source.getHeight());
+        g.fillRect(0, 0,source.getWidth(), source.getHeight());
         g.dispose();
         return tinted;
+    }
+
+    private  BufferedImage applyZoomFactor(BufferedImage source, int zoomFactor){
+        int newImgWidth = source.getWidth() * zoomFactor;
+        int newImgHeight = source.getHeight() * zoomFactor;
+
+        BufferedImage scaled = new BufferedImage(newImgWidth, newImgHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = scaled.createGraphics();
+        g.drawImage(source, 0, 0, newImgWidth, newImgHeight, null);
+        g.dispose();
+
+        return scaled;
     }
 }

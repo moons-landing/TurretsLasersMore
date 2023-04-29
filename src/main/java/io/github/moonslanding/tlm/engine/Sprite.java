@@ -19,6 +19,7 @@ public class Sprite {
         sprite.image = ImageIO.read(stream);
         sprite.width = sprite.image.getWidth();
         sprite.height = sprite.image.getHeight();
+
         return sprite;
     }
 
