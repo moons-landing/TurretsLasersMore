@@ -25,7 +25,8 @@ public class SpritedGameObject extends GameObject implements IRenderable {
     public void render(Graphics graphics) {
         if (sprite != null) {
             BufferedImage tintApplied = applyTint(sprite.getTexture());
-            graphics.drawImage(tintApplied, getX(), getY(), null);
+            BufferedImage scaled = applyZoomFactor(tintApplied, 3); // apply zoom factor here
+            graphics.drawImage(scaled, getX(), getY(), null);
         }
     }
 
@@ -38,13 +39,26 @@ public class SpritedGameObject extends GameObject implements IRenderable {
     }
 
     private BufferedImage applyTint(BufferedImage source) {
+
         BufferedImage tinted = new BufferedImage(source.getWidth(), source.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = tinted.createGraphics();
         g.drawImage(source, 0, 0, null);
         g.setComposite(AlphaComposite.SrcAtop);
         g.setColor(tint);
-        g.fillRect(0, 0, source.getWidth(), source.getHeight());
+        g.fillRect(0, 0,source.getWidth(), source.getHeight());
         g.dispose();
         return tinted;
+    }
+
+    private  BufferedImage applyZoomFactor(BufferedImage source, int zoomFactor){
+        int newImgWidth = source.getWidth() * zoomFactor;
+        int newImgHeight = source.getHeight() * zoomFactor;
+
+        BufferedImage scaled = new BufferedImage(newImgWidth, newImgHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = scaled.createGraphics();
+        g.drawImage(source, 0, 0, newImgWidth, newImgHeight, null);
+        g.dispose();
+
+        return scaled;
     }
 }
