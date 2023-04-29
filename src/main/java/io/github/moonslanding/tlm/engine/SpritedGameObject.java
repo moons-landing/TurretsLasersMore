@@ -22,11 +22,12 @@ public class SpritedGameObject extends GameObject implements IRenderable {
     }
 
     @Override
-    public void render(Graphics graphics) {
+    public void render(WrappedGraphic graphics) {
+        Graphics graphic = graphics.getGraphic();
         if (sprite != null) {
             BufferedImage tintApplied = applyTint(sprite.getTexture());
-            BufferedImage scaled = applyZoomFactor(tintApplied, 3); // apply zoom factor here
-            graphics.drawImage(scaled, getX(), getY(), null);
+            BufferedImage scaled = applyZoomFactor(tintApplied, graphics.getZoomFactor()); // apply zoom factor here
+            graphic.drawImage(scaled, getX(), getY(), null);
         }
     }
 

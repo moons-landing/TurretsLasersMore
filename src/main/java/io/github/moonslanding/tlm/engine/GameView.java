@@ -21,7 +21,9 @@ public class GameView extends Canvas {
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
         game.getWorld().getObjects().forEach(gameObject -> {
             if (gameObject instanceof IRenderable) {
-                ((IRenderable) gameObject).render(this.getGraphics());
+                Graphics graphics = this.getGraphics();
+                WrappedGraphic wrappedGraphic = new WrappedGraphic(graphics, 3);
+                ((IRenderable) gameObject).render(wrappedGraphic);
             }
         });
     }
