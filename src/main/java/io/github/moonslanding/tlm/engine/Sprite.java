@@ -29,4 +29,8 @@ public class Sprite {
     public int getHeight() {
         return height;
     }
+
+    public BufferedImage getTexture() {
+        return image;
+    }
 }

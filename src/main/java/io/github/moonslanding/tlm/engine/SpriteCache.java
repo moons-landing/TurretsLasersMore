@@ -31,6 +31,7 @@ public class SpriteCache {
         initialize();
         Map<String, Sprite> presentMap = getLoadedSprites();
         if (presentMap.containsKey(spriteName)) return presentMap.get(spriteName);
+        System.out.println("loading new sprite: " + spriteName);
         try {
             loadFromResource(spriteName);
             return getLoadedSprites().get(spriteName);
