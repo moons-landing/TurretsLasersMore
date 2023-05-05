@@ -25,8 +25,7 @@ public class SpritedGameObject extends GameObject implements IRenderable {
     public void render(WrappedGraphic graphics) {
         Graphics graphic = graphics.getGraphic();
         if (sprite != null) {
-//            BufferedImage tintApplied = applyTint(sprite.getTexture());
-//            BufferedImage scaled = applyZoomFactor(tintApplied, graphics.getZoomFactor()); // apply zoom factor here
+
             BufferedImage img = createGraphic(sprite.getTexture(), graphics);
             graphic.drawImage(img, getX(), getY(), null);
         }
@@ -46,18 +45,6 @@ public class SpritedGameObject extends GameObject implements IRenderable {
         g.setColor(tint);
         g.fillRect(0, 0,source.getWidth(), source.getHeight());
     }
-
-//    private  BufferedImage applyZoomFactor(BufferedImage source, int zoomFactor){
-//        int newImgWidth = source.getWidth() * zoomFactor;
-//        int newImgHeight = source.getHeight() * zoomFactor;
-//
-//        BufferedImage scaled = new BufferedImage(newImgWidth, newImgHeight, BufferedImage.TYPE_INT_ARGB);
-//        Graphics2D g = scaled.createGraphics();
-//        g.drawImage(source, 0, 0, newImgWidth, newImgHeight, null);
-//        g.dispose();
-//
-//        return scaled;
-//    }
 
     private int[] getnewImgResolution(BufferedImage source, int zoomFactor){
         // return Width and height of image after zooming
