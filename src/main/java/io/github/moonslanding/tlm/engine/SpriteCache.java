@@ -9,8 +9,8 @@ import java.util.Map;
 public class SpriteCache {
 
     private static SpriteCache instance;
-    private Map<String, Sprite> loadedSprites = new HashMap<>();
-    private ClassLoader classLoader = getClass().getClassLoader();
+    private final Map<String, Sprite> loadedSprites = new HashMap<>();
+    private final ClassLoader classLoader = getClass().getClassLoader();
 
     private SpriteCache() {
 

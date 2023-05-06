@@ -23,21 +23,27 @@ public class GameScene {
          *
          *
          */
-switch (type) {
+switch (type.toLowerCase()) {
             case "pressed":
-                pressListeners.get(KeyCode).accept(this.game);
+                pressListeners.put(KeyCode, consumer);
                 break;
             case "released":
-                releaseListeners.get(KeyCode).accept(this.game);
+                releaseListeners.put(KeyCode, consumer);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid type: " + type);
         }
     }
 
-    public void handleKeyPress(KeyEvent e) {
+    public void onKeyPressed(KeyEvent e) {
         if (pressListeners.containsKey(e.getKeyCode())) {
             pressListeners.get(e.getKeyCode()).accept(game);
+        }
+    }
+
+    public void onKeyReleased(KeyEvent e) {
+        if (releaseListeners.containsKey(e.getKeyCode())) {
+            releaseListeners.get(e.getKeyCode()).accept(game);
         }
     }
 }

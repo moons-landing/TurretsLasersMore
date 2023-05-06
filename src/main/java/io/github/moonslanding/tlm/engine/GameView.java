@@ -3,15 +3,28 @@ package io.github.moonslanding.tlm.engine;
 import io.github.moonslanding.tlm.engine.interfaces.IRenderable;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 public class GameView extends Canvas {
 
-    private Game game;
+    private final Game game;
 
     public GameView(Game game) {
         this.game = game;
         setPreferredSize(new Dimension(game.getWorld().getWidth(), game.getWorld().getHeight()));
+        this.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                game.getCurrentScene().onKeyPressed(e);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e){
+            game.getCurrentScene().onKeyReleased(e);
+        }});
     }
 
     @Override
@@ -27,4 +40,17 @@ public class GameView extends Canvas {
             }
         });
     }
+
+//    public  void addKeyListener(new KeyAdapter(){
+//        @Override
+//        public void keyPressed(KeyEvent e) {
+//            game.getCurrentScene().onKeyPressed(e);
+//        }
+//
+//        @Override
+//        public void keyReleased(KeyEvent e){
+//            game.getCurrentScene().onKeyReleased(e);
+//        }
+    }
+    })
 }
