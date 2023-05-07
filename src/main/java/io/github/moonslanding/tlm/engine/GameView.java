@@ -51,6 +51,5 @@ public class GameView extends Canvas {
 //        public void keyReleased(KeyEvent e){
 //            game.getCurrentScene().onKeyReleased(e);
 //        }
-    }
-    })
+
 }
