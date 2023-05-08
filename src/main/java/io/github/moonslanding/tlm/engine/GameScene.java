@@ -28,7 +28,6 @@ public class GameScene {
     }
 
     public void onKeyPressed(KeyEvent e) {
-        System.out.println(e);
         if (pressListeners.containsKey(e.getKeyCode())) {
             pressListeners.get(e.getKeyCode()).accept(game);
         }

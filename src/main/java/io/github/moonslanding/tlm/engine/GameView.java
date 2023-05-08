@@ -2,21 +2,25 @@ package io.github.moonslanding.tlm.engine;
 
 import io.github.moonslanding.tlm.engine.interfaces.IRenderable;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
-public class GameView extends Canvas implements Runnable {
+public class GameView extends JPanel implements Runnable {
 
     private final Game game;
     private Thread drawThread;
     private final int FPS = 60;
 
     public GameView(Game game, int width, int height) {
+        super(true);
         this.game = game;
         setPreferredSize(new Dimension(width, height));
+        setBackground(Color.black);
+        setFocusable(true);
         this.addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e) {
@@ -39,16 +43,24 @@ public class GameView extends Canvas implements Runnable {
         drawThread.start();
     }
 
+    public void stopDrawThread() {
+        drawThread.interrupt();
+        drawThread = null;
+    }
+
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        renderOnCanvas(g);
+    }
+
+    public void renderOnCanvas(Graphics g) {
         game.getWorld().getObjects().forEach(gameObject -> {
             if (gameObject instanceof IRenderable) {
-                Graphics graphics = this.getGraphics();
+                Graphics2D graphics = (Graphics2D) g.create();
                 WrappedGraphic wrappedGraphic = new WrappedGraphic(graphics, 3);
                 ((IRenderable) gameObject).render(wrappedGraphic);
+                graphics.dispose();
             }
         });
     }
