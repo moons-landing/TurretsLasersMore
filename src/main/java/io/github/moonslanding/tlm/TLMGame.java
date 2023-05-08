@@ -24,8 +24,11 @@ public class TLMGame {
         window.setResizable(false);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setVisible(true);
+
+        gui.startDrawThread();
     }
 
+    @Deprecated
     private static void testSprites(Game game) {
         game.getWorld().addObject(
                 new SpritedGameObject(
@@ -51,23 +54,20 @@ public class TLMGame {
         cyanShip.setTint(Color.CYAN);
         game.getWorld().addObject(cyanShip);
 
-
         // Demo Scene
         GameScene demoScene = new GameScene(game);
 
         demoScene.registerKeybind(KeyEvent.VK_W, (e) -> {
             System.out.println("W Pressed");
-        }, "pressed");
+        }, GameScene.KeybindEventType.PRESSED);
 
         demoScene.registerKeybind(KeyEvent.VK_W, (e) -> {
             System.out.println("W Released");
-        }, "released");
-
-
-
+        }, GameScene.KeybindEventType.RELEASED);
 
         game.setCurrentScene(demoScene);
-
     }
+
+
 
 }

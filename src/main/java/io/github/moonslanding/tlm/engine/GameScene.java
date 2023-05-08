@@ -15,23 +15,15 @@ public class GameScene {
         this.game = game;
     }
 
-    public void registerKeybind(int KeyCode, Consumer<Game> consumer, String type) {
-        /**
-         * @Param type the input string whether `pressed` or `released`
-         *
-         *
-         *
-         *
-         */
-switch (type.toLowerCase()) {
-            case "pressed":
-                pressListeners.put(KeyCode, consumer);
-                break;
-            case "released":
-                releaseListeners.put(KeyCode, consumer);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid type: " + type);
+    public enum KeybindEventType {
+        PRESSED,
+        RELEASED
+    }
+
+    public void registerKeybind(int KeyCode, Consumer<Game> consumer, KeybindEventType eventType) {
+        switch (eventType) {
+            case PRESSED -> pressListeners.put(KeyCode, consumer);
+            case RELEASED -> releaseListeners.put(KeyCode, consumer);
         }
     }
 
