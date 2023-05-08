@@ -25,6 +25,9 @@ public class GameView extends Canvas {
             public void keyReleased(KeyEvent e){
             game.getCurrentScene().onKeyReleased(e);
         }});
+        new javax.swing.Timer(1000 / 60, e -> {
+            repaint();
+        }).start();
     }
 
     @Override
