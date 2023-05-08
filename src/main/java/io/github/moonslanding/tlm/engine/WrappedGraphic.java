@@ -5,7 +5,7 @@ import java.awt.*;
 public class WrappedGraphic {
 
     private int zoomFactor;
-    private Graphics graphic;
+    private final Graphics graphic;
 
     public WrappedGraphic(Graphics graphic, int zoomFactor) {
         this.zoomFactor = zoomFactor;

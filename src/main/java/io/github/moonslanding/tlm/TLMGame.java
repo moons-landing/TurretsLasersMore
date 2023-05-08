@@ -4,6 +4,8 @@ import io.github.moonslanding.tlm.engine.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.Random;
 
 public class TLMGame {
 
@@ -49,6 +51,33 @@ public class TLMGame {
         );
         cyanShip.setTint(Color.CYAN);
         game.getWorld().addObject(cyanShip);
+
+
+        // Demo Scene
+        GameScene demoScene = new GameScene(game);
+
+        demoScene.registerKeybind(KeyEvent.VK_W, (g) -> {
+            System.out.println("W Pressed");
+            yellowShip.move(0, -1);
+        }, GameScene.KeybindEventType.PRESSED);
+
+        demoScene.registerKeybind(KeyEvent.VK_S, (g) -> {
+            System.out.println("S Pressed");
+            yellowShip.move(0, 1);
+        }, GameScene.KeybindEventType.PRESSED);
+
+        demoScene.registerKeybind(KeyEvent.VK_A, (g) -> {
+            System.out.println("A Pressed");
+            yellowShip.move(-1, 0);
+        }, GameScene.KeybindEventType.PRESSED);
+
+        demoScene.registerKeybind(KeyEvent.VK_D, (g) -> {
+            System.out.println("D Pressed");
+            yellowShip.move(1, 0);
+        }, GameScene.KeybindEventType.PRESSED);
+
+        game.setCurrentScene(demoScene);
+
     }
 
 }

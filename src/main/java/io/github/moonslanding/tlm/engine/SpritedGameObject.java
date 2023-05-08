@@ -56,7 +56,7 @@ public class SpritedGameObject extends GameObject implements IRenderable {
 
     private BufferedImage createGraphic(BufferedImage source, WrappedGraphic graphics){
 
-        int newImgRes[] = getnewImgResolution(source, graphics.getZoomFactor());
+        int[] newImgRes = getnewImgResolution(source, graphics.getZoomFactor());
 
         int newImgWidth = newImgRes[0];
         int newImgHeight = newImgRes[1];

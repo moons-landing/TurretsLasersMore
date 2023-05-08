@@ -5,8 +5,9 @@ import java.util.List;
 
 public class GameWorld {
 
-    private int width, height;
-    private List<GameObject> objects = new ArrayList<>();
+    private final int width;
+    private final int height;
+    private final List<GameObject> objects = new ArrayList<>();
 
     public GameWorld(int width, int height) {
         this.width = width;

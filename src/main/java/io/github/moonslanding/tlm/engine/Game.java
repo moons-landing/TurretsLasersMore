@@ -3,6 +3,7 @@ package io.github.moonslanding.tlm.engine;
 public class Game {
 
     private GameWorld world;
+    private GameScene CurrentScene;
 
     public Game(GameWorld world) {
         this.world = world;
@@ -18,6 +19,16 @@ public class Game {
 
     public void setWorld(GameWorld world) {
         this.world = world;
+    }
+
+
+    public GameScene getCurrentScene() {
+        return CurrentScene;
+    }
+
+    public void setCurrentScene(GameScene scene) {
+        // do some stuff here
+        this.CurrentScene = scene;
     }
 
 }
