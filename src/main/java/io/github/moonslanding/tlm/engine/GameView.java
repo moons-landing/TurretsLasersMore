@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 
 public class GameView extends JPanel implements Runnable {
@@ -55,14 +54,14 @@ public class GameView extends JPanel implements Runnable {
     }
 
     public void renderOnCanvas(Graphics g) {
+        Graphics2D graphics = (Graphics2D) g.create();
         game.getWorld().getObjects().forEach(gameObject -> {
             if (gameObject instanceof IRenderable) {
-                Graphics2D graphics = (Graphics2D) g.create();
                 WrappedGraphic wrappedGraphic = new WrappedGraphic(graphics, 3);
                 ((IRenderable) gameObject).render(wrappedGraphic);
-                graphics.dispose();
             }
         });
+        graphics.dispose();
     }
 
     @Override

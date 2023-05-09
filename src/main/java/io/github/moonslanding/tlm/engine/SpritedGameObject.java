@@ -35,6 +35,19 @@ public class SpritedGameObject extends GameObject implements IRenderable {
         }
     }
 
+    @Override
+    public void render(WrappedGraphic graphics, int x, int y) {
+        Graphics graphic = graphics.getGraphic();
+        if (sprite != null) {
+            BufferedImage img = createGraphic(sprite.getTexture(), graphics);
+
+            graphic.drawImage(img,
+                    x - (img.getWidth() / 2),
+                    y - (img.getHeight() / 2),
+                    null);
+        }
+    }
+
     public void setTint(Color tint) {
         this.tint = tint;
     }
