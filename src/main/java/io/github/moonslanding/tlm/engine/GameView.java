@@ -15,6 +15,8 @@ public class GameView extends JPanel implements Runnable {
     private Thread drawThread;
     private final int FPS = 60;
 
+    private int mouseX, mouseY;
+
     public GameView(Game game, int width, int height) {
         super(true);
         this.game = game;
@@ -40,7 +42,10 @@ public class GameView extends JPanel implements Runnable {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                System.out.println("Test: " + e.getX() + " " + e.getY());
+                mouseX = e.getX();
+                mouseY = e.getY();
+                game.getCurrentScene().onMouseMoved(e);
+                System.out.println("Test: " + mouseX + "|" + mouseY);
             }
         });
     }
@@ -94,6 +99,14 @@ public class GameView extends JPanel implements Runnable {
                 delta--;
             }
         }
+    }
+
+    public int getMouseX() {
+        return mouseX;
+    }
+
+    public int getMouseY() {
+        return mouseY;
     }
 
 //    public  void addKeyListener(new KeyAdapter(){

@@ -6,6 +6,7 @@ import io.github.moonslanding.tlm.engine.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class TLMGame {
@@ -53,18 +54,21 @@ public class TLMGame {
         }
 
         GameScene followScene = new GameScene(game);
-        followScene.registerKeybind(KeyEvent.VK_Q, (g) -> {
-            System.out.println("Q Presses");
-            // yellowShip.rotate(................)
-            // rotate in counterclockwise direction
-            player.setFacing(player.getFacing()-10);
-        }, GameScene.KeybindEventType.PRESSED);
-        followScene.registerKeybind(KeyEvent.VK_E, (g) -> {
-            System.out.println("E Presses");
-            // yellowShip.rotate(.................)
-            // rotate in clockwise direction
-            player.setFacing(player.getFacing()+10);
-        }, GameScene.KeybindEventType.PRESSED);
+        followScene.registerMouse(MouseEvent.MOUSE_MOVED, (g) -> {
+            player.setFacingto(gui.getMouseX(), gui.getMouseY());
+        }, GameScene.MouseEventType.MOVED);
+//        followScene.registerKeybind(KeyEvent.VK_Q, (g) -> {
+//            System.out.println("Q Presses");
+//            // yellowShip.rotate(................)
+//            // rotate in counterclockwise direction
+//            player.setFacing(player.getFacing()-10);
+//        }, GameScene.KeybindEventType.PRESSED);
+//        followScene.registerKeybind(KeyEvent.VK_E, (g) -> {
+//            System.out.println("E Presses");
+//            // yellowShip.rotate(.................)
+//            // rotate in clockwise direction
+//            player.setFacing(player.getFacing()+10);
+//        }, GameScene.KeybindEventType.PRESSED);
         followScene.registerKeybind(KeyEvent.VK_W, (g) -> {
             player.move(0, -10);
         }, GameScene.KeybindEventType.PRESSED);
