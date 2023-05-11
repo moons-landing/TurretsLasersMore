@@ -6,7 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 public class GameView extends JPanel implements Runnable {
 
@@ -29,6 +30,17 @@ public class GameView extends JPanel implements Runnable {
             @Override
             public void keyReleased(KeyEvent e) {
                 game.getCurrentScene().onKeyReleased(e);
+            }
+        });
+        this.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                System.out.println("Test: " + e.getX() + " " + e.getY());
             }
         });
     }
