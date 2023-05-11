@@ -1,5 +1,6 @@
 package io.github.moonslanding.tlm;
 
+import io.github.moonslanding.tlm.camera.FollowedGameView;
 import io.github.moonslanding.tlm.engine.*;
 
 import javax.swing.*;
@@ -10,13 +11,13 @@ import java.util.Random;
 public class TLMGame {
 
     private static final Sprite playerShipSprite = SpriteCache.loadSprite("player_ship");
+    private static GameWorld world = new GameWorld(2000,2000 );
+    private static Game game = new Game(world);
+    private static GameView gui;
+    private static JFrame window = new JFrame();
 
     public static void main(String[] args) {
-        Game game = new Game();
-        GameView gui = new GameView(game);
-        JFrame window = new JFrame();
-
-        testSprites(game);
+        gui = new GameView(game);
 
         window.add(gui);
         window.pack();
@@ -25,59 +26,56 @@ public class TLMGame {
         window.setResizable(false);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setVisible(true);
+
+        gui.startDrawThread();
+        testFollow(game);
     }
 
-    private static void testSprites(Game game) {
-        game.getWorld().addObject(
-                new SpritedGameObject(
-                        (game.getWorld().getWidth() / 2) - (playerShipSprite.getWidth() / 2),
-                        (game.getWorld().getHeight() / 2) - (playerShipSprite.getHeight() / 2),
-                        "player_ship")
-        );
-
-        // Tinting Test
-        SpritedGameObject yellowShip = new SpritedGameObject(
-                (game.getWorld().getWidth() / 2) - (playerShipSprite.getWidth() / 2) - 30,
-                (game.getWorld().getHeight() / 2) - (playerShipSprite.getHeight() / 2),
+    private static void testFollow(Game game) {
+        SpritedGameObject player = new SpritedGameObject(
+                world.getWidth() / 2,
+                world.getHeight() / 2,
                 "player_ship"
         );
-        yellowShip.setTint(Color.YELLOW);
-        game.getWorld().addObject(yellowShip);
 
-        SpritedGameObject cyanShip = new SpritedGameObject(
-                (game.getWorld().getWidth() / 2) - (playerShipSprite.getWidth() / 2) + 30,
-                (game.getWorld().getHeight() / 2) - (playerShipSprite.getHeight() / 2),
-                "player_ship"
-        );
-        cyanShip.setTint(Color.CYAN);
-        game.getWorld().addObject(cyanShip);
+        world.addObject(player);
+        player.setTint(Color.CYAN);
 
+        Random rand = new Random();
+        for (int i = 0; i < 100; i++) {
+            world.addObject(new SpritedGameObject(
+                    rand.nextInt(0, world.getWidth()),
+                    rand.nextInt(0, world.getHeight()),
+                    "player_ship"
+            ));
+        }
 
-        // Demo Scene
-        GameScene demoScene = new GameScene(game);
-
-        demoScene.registerKeybind(KeyEvent.VK_W, (g) -> {
-            System.out.println("W Pressed");
-            yellowShip.move(0, -1);
+        GameScene followScene = new GameScene(game);
+        followScene.registerKeybind(KeyEvent.VK_W, (g) -> {
+            player.move(0, -10);
         }, GameScene.KeybindEventType.PRESSED);
-
-        demoScene.registerKeybind(KeyEvent.VK_S, (g) -> {
-            System.out.println("S Pressed");
-            yellowShip.move(0, 1);
+        followScene.registerKeybind(KeyEvent.VK_S, (g) -> {
+            player.move(0, 10);
         }, GameScene.KeybindEventType.PRESSED);
-
-        demoScene.registerKeybind(KeyEvent.VK_A, (g) -> {
-            System.out.println("A Pressed");
-            yellowShip.move(-1, 0);
+        followScene.registerKeybind(KeyEvent.VK_A, (g) -> {
+            player.move(-10, 0);
         }, GameScene.KeybindEventType.PRESSED);
-
-        demoScene.registerKeybind(KeyEvent.VK_D, (g) -> {
-            System.out.println("D Pressed");
-            yellowShip.move(1, 0);
+        followScene.registerKeybind(KeyEvent.VK_D, (g) -> {
+            player.move(10, 0);
         }, GameScene.KeybindEventType.PRESSED);
+        game.setCurrentScene(followScene);
 
-        game.setCurrentScene(demoScene);
+        changeView(new FollowedGameView(game, player));
+    }
 
+
+    private static void changeView(GameView view) {
+        gui.stopDrawThread();
+        gui = view;
+        gui.revalidate();
+        window.add(gui);
+        window.pack();
+        gui.startDrawThread();
     }
 
 }

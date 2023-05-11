@@ -25,9 +25,26 @@ public class SpritedGameObject extends GameObject implements IRenderable {
     public void render(WrappedGraphic graphics) {
         Graphics graphic = graphics.getGraphic();
         if (sprite != null) {
-
             BufferedImage img = createGraphic(sprite.getTexture(), graphics);
-            graphic.drawImage(img, getX(), getY(), null);
+
+            // Because the image is influenced by size, we cannot just use getX() and getY().
+            graphic.drawImage(img,
+                    getX() - (img.getWidth() / 2),
+                    getY() - (img.getHeight() / 2),
+                    null);
+        }
+    }
+
+    @Override
+    public void render(WrappedGraphic graphics, int x, int y) {
+        Graphics graphic = graphics.getGraphic();
+        if (sprite != null) {
+            BufferedImage img = createGraphic(sprite.getTexture(), graphics);
+
+            graphic.drawImage(img,
+                    x - (img.getWidth() / 2),
+                    y - (img.getHeight() / 2),
+                    null);
         }
     }
 
