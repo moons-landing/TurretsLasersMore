@@ -57,13 +57,13 @@ public class TLMGame {
             System.out.println("Q Presses");
             // yellowShip.rotate(................)
             // rotate in counterclockwise direction
-            yellowShip.setFacing(yellowShip.getFacing()-10);
+            player.setFacing(player.getFacing()-10);
         }, GameScene.KeybindEventType.PRESSED);
         followScene.registerKeybind(KeyEvent.VK_E, (g) -> {
             System.out.println("E Presses");
             // yellowShip.rotate(.................)
             // rotate in clockwise direction
-            yellowShip.setFacing(yellowShip.getFacing()+10);
+            player.setFacing(player.getFacing()+10);
         }, GameScene.KeybindEventType.PRESSED);
         followScene.registerKeybind(KeyEvent.VK_W, (g) -> {
             player.move(0, -10);
