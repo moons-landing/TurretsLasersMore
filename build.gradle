@@ -14,7 +14,7 @@ application {
 }
 
 // Semantic versioning
-version = '0.1.0'
+version = '0.2.0'
 
 // Dependencies
 repositories {
@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
 }
 
 test {
