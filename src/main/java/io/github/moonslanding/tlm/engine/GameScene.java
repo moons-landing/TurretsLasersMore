@@ -20,10 +20,12 @@ public class GameScene {
         RELEASED
     }
 
+
     public void registerKeybind(int KeyCode, Consumer<Game> consumer, KeybindEventType eventType) {
         switch (eventType) {
             case PRESSED -> pressListeners.put(KeyCode, consumer);
             case RELEASED -> releaseListeners.put(KeyCode, consumer);
+
         }
     }
 

@@ -37,6 +37,7 @@ public class TLMGame {
                 world.getHeight() / 2,
                 "player_ship"
         );
+
         world.addObject(player);
         player.setTint(Color.CYAN);
 
@@ -66,6 +67,7 @@ public class TLMGame {
 
         changeView(new FollowedGameView(game, player));
     }
+
 
     private static void changeView(GameView view) {
         gui.stopDrawThread();
