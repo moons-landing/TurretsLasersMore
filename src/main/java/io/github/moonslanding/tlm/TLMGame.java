@@ -6,11 +6,12 @@ import io.github.moonslanding.tlm.engine.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 public class TLMGame {
 
     private static final Sprite playerShipSprite = SpriteCache.loadSprite("player_ship");
-    private static GameWorld world = new GameWorld(10000, 10000);
+    private static GameWorld world = new GameWorld(2000,2000 );
     private static Game game = new Game(world);
     private static GameView gui;
     private static JFrame window = new JFrame();
@@ -30,46 +31,6 @@ public class TLMGame {
         testFollow(game);
     }
 
-    @Deprecated
-    private static void testSprites(Game game) {
-        game.getWorld().addObject(
-                new SpritedGameObject(
-                        (game.getWorld().getWidth() / 2) - (playerShipSprite.getWidth() / 2),
-                        (game.getWorld().getHeight() / 2) - (playerShipSprite.getHeight() / 2),
-                        "player_ship")
-        );
-
-        // Tinting Test
-        SpritedGameObject yellowShip = new SpritedGameObject(
-                (game.getWorld().getWidth() / 2) - (playerShipSprite.getWidth() / 2) - 30,
-                (game.getWorld().getHeight() / 2) - (playerShipSprite.getHeight() / 2),
-                "player_ship"
-        );
-        yellowShip.setTint(Color.YELLOW);
-        game.getWorld().addObject(yellowShip);
-
-        SpritedGameObject cyanShip = new SpritedGameObject(
-                (game.getWorld().getWidth() / 2) - (playerShipSprite.getWidth() / 2) + 30,
-                (game.getWorld().getHeight() / 2) - (playerShipSprite.getHeight() / 2),
-                "player_ship"
-        );
-        cyanShip.setTint(Color.CYAN);
-        game.getWorld().addObject(cyanShip);
-
-        // Demo Scene
-        GameScene demoScene = new GameScene(game);
-
-        demoScene.registerKeybind(KeyEvent.VK_W, (e) -> {
-            System.out.println("W Pressed");
-        }, GameScene.KeybindEventType.PRESSED);
-
-        demoScene.registerKeybind(KeyEvent.VK_W, (e) -> {
-            System.out.println("W Released");
-        }, GameScene.KeybindEventType.RELEASED);
-
-        game.setCurrentScene(demoScene);
-    }
-
     private static void testFollow(Game game) {
         SpritedGameObject player = new SpritedGameObject(
                 world.getWidth() / 2,
@@ -77,18 +38,29 @@ public class TLMGame {
                 "player_ship"
         );
         world.addObject(player);
+        player.setTint(Color.CYAN);
+
+        Random rand = new Random();
+        for (int i = 0; i < 100; i++) {
+            world.addObject(new SpritedGameObject(
+                    rand.nextInt(0, world.getWidth()),
+                    rand.nextInt(0, world.getHeight()),
+                    "player_ship"
+            ));
+        }
+
         GameScene followScene = new GameScene(game);
         followScene.registerKeybind(KeyEvent.VK_W, (g) -> {
-            player.move(0, -100);
+            player.move(0, -10);
         }, GameScene.KeybindEventType.PRESSED);
         followScene.registerKeybind(KeyEvent.VK_S, (g) -> {
-            player.move(0, 100);
+            player.move(0, 10);
         }, GameScene.KeybindEventType.PRESSED);
         followScene.registerKeybind(KeyEvent.VK_A, (g) -> {
-            player.move(-100, 0);
+            player.move(-10, 0);
         }, GameScene.KeybindEventType.PRESSED);
         followScene.registerKeybind(KeyEvent.VK_D, (g) -> {
-            player.move(100, 0);
+            player.move(10, 0);
         }, GameScene.KeybindEventType.PRESSED);
         game.setCurrentScene(followScene);
 
@@ -103,7 +75,5 @@ public class TLMGame {
         window.pack();
         gui.startDrawThread();
     }
-
-
 
 }
