@@ -27,7 +27,6 @@ public class GameView extends JPanel implements Runnable {
             }
 
             @Override
-
             public void keyReleased(KeyEvent e) {
                 game.getCurrentScene().onKeyReleased(e);
             }
@@ -42,6 +41,7 @@ public class GameView extends JPanel implements Runnable {
         drawThread = new Thread(this);
         drawThread.start();
     }
+
 
     public void stopDrawThread() {  
         drawThread.interrupt();

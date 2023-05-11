@@ -27,6 +27,7 @@ public class TLMGame {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setVisible(true);
 
+
         gui.startDrawThread();
         testFollow(game);
     }
@@ -37,6 +38,7 @@ public class TLMGame {
                 world.getHeight() / 2,
                 "player_ship"
         );
+
 
         world.addObject(player);
         player.setTint(Color.CYAN);
@@ -51,6 +53,18 @@ public class TLMGame {
         }
 
         GameScene followScene = new GameScene(game);
+        followScene.registerKeybind(KeyEvent.VK_Q, (g) -> {
+            System.out.println("Q Presses");
+            // yellowShip.rotate(................)
+            // rotate in counterclockwise direction
+            yellowShip.setFacing(yellowShip.getFacing()-10);
+        }, GameScene.KeybindEventType.PRESSED);
+        followScene.registerKeybind(KeyEvent.VK_E, (g) -> {
+            System.out.println("E Presses");
+            // yellowShip.rotate(.................)
+            // rotate in clockwise direction
+            yellowShip.setFacing(yellowShip.getFacing()+10);
+        }, GameScene.KeybindEventType.PRESSED);
         followScene.registerKeybind(KeyEvent.VK_W, (g) -> {
             player.move(0, -10);
         }, GameScene.KeybindEventType.PRESSED);

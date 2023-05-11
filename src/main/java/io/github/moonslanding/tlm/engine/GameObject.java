@@ -26,6 +26,7 @@ public class GameObject {
         y += dy;
     }
 
+
     public int getWidth() {
         return width;
     }
