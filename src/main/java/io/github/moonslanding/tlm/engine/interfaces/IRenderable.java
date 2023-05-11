@@ -8,4 +8,6 @@ public interface IRenderable {
 
     void render(WrappedGraphic graphics);
 
+    void render(WrappedGraphic graphics, int x, int y);
+
 }
