@@ -79,7 +79,7 @@ public class SpritedGameObject extends GameObject implements IRenderable {
         double sin = Math.abs(Math.sin(Math.toRadians(deg))),
                 cos = Math.abs(Math.cos(Math.toRadians(deg)));
 
-        int newW = (int) Math.floor(w *cos + h*sin);
+        int newW = (int) Math.floor(w*cos + h*sin);
         int newH = (int) Math.floor(h*cos + w*sin);
 
         return new int[]{newW, newH};
@@ -95,6 +95,7 @@ public class SpritedGameObject extends GameObject implements IRenderable {
         BufferedImage img = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = img.createGraphics();
 
+        System.out.println(newW + " " + newH);
         System.out.println(getFacing());
 
         g.translate((newW-source.getWidth())/2, (newH-source.getHeight())/2);
