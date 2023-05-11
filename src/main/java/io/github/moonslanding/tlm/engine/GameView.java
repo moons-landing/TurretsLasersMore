@@ -42,9 +42,11 @@ public class GameView extends JPanel implements Runnable {
         drawThread.start();
     }
 
-    public void stopDrawThread() {
+
+    public void stopDrawThread() {  
         drawThread.interrupt();
         drawThread = null;
+
     }
 
     @Override

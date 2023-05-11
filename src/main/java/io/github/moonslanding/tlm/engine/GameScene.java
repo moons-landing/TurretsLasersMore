@@ -20,23 +20,16 @@ public class GameScene {
         RELEASED
     }
 
-    public void registerKeybind(int keyCode, Consumer<Game> consumer, KeybindEventType type) {
-        /**
-         * @Param type the input string whether `pressed` or `released`
-         *
-         *
-         *
-         *
-         */
-        switch (type) {
-            case PRESSED -> pressListeners.put(keyCode, consumer);
-            case RELEASED -> releaseListeners.put(keyCode, consumer);
-            default -> throw new IllegalArgumentException("Invalid type: " + type);
+
+    public void registerKeybind(int KeyCode, Consumer<Game> consumer, KeybindEventType eventType) {
+        switch (eventType) {
+            case PRESSED -> pressListeners.put(KeyCode, consumer);
+            case RELEASED -> releaseListeners.put(KeyCode, consumer);
+
         }
     }
 
     public void onKeyPressed(KeyEvent e) {
-        System.out.println(e);
         if (pressListeners.containsKey(e.getKeyCode())) {
             pressListeners.get(e.getKeyCode()).accept(game);
         }

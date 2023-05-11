@@ -27,6 +27,15 @@ public class GameWorld {
         objects.add(object);
     }
 
+    public void removeObject(GameObject object) {
+        if (!objects.contains(object)) return;
+        objects.remove(object);
+    }
+
+    public void clearWorld() {
+        objects.clear();
+    }
+
     public List<GameObject> getObjects() {
         return objects;
     }
