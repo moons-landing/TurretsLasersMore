@@ -33,10 +33,10 @@ A roguelike, survival game where you control a lone spacecraft drifting through 
 * Use `A` to move left
 * Use `S` to move down
 * Use `D` to move right
-* Use Mouse to Aim an enemy or direction of the bullet
+* Use mouse to aim an enemy or direction of the bullet
 
 ## Team Member
 
-1. Pawitchaya Chaloeijanya
-2. Thanadol Udomsirinanchai
-3. Preawpan Thamapipol
+1. 6410545525 Pawitchaya Chaloeijanya
+2. 6410546165 Thanadol Udomsirinanchai
+3. 6410546203 Preawpan Thamapipol
