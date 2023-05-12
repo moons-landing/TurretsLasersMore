@@ -1,6 +1,5 @@
 package io.github.moonslanding.tlm.entities;
 
-import io.github.moonslanding.tlm.engine.Game;
 import io.github.moonslanding.tlm.engine.GameObject;
 import io.github.moonslanding.tlm.engine.GameWorld;
 import io.github.moonslanding.tlm.engine.SpritedGameObject;
@@ -14,10 +13,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class WeaponEntity extends SpritedGameObject {
 
-    private Weapon weapon;
-    private GameObject owner;
+    private final Weapon weapon;
+    private final GameObject owner;
+    private final Timer aiTimer = new Timer();
     private ObjectArrayList<GameObject> aimCandidates;
-    private Timer aiTimer = new Timer();
 
     public WeaponEntity(GameObject owner, Weapon weapon) {
         super(owner.getX(), owner.getY(), weapon.getSpriteName());
@@ -64,8 +63,8 @@ public class WeaponEntity extends SpritedGameObject {
         world.getObjects().forEach(o -> {
             if (!(o instanceof PlayerShip)) return;
             if (Math.sqrt
-                    (Math.abs(o.getX() - owner.getX())^2 +
-                            (Math.abs(o.getY() - owner.getY())^2)) < 100) {
+                    (Math.abs(o.getX() - owner.getX()) ^ 2 +
+                            (Math.abs(o.getY() - owner.getY()) ^ 2)) < 100) {
                 setFacing(Math.toDegrees(Math.atan2(o.getY() - owner.getY(), o.getX() - owner.getX())));
             }
         });
@@ -78,8 +77,8 @@ public class WeaponEntity extends SpritedGameObject {
                     o -> {
                         if (!(o instanceof EnemyShip)) return;
                         if (Math.sqrt
-                                (Math.abs(o.getX() - owner.getX())^2 +
-                                        (Math.abs(o.getY() - owner.getY())^2)) < 100) {
+                                (Math.abs(o.getX() - owner.getX()) ^ 2 +
+                                        (Math.abs(o.getY() - owner.getY()) ^ 2)) < 100) {
                             aimCandidates.add(o);
                         }
                     }

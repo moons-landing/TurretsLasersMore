@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class GameScene {
@@ -18,15 +19,6 @@ public class GameScene {
         this.game = game;
     }
 
-    public enum KeybindEventType {
-        PRESSED,
-        RELEASED
-    }
-
-    public enum MouseEventType {
-        MOVED
-    }
-
     public void registerKeybind(int KeyCode, Consumer<Game> consumer, KeybindEventType eventType) {
         switch (eventType) {
             case PRESSED -> pressListeners.put(KeyCode, consumer);
@@ -35,8 +27,8 @@ public class GameScene {
     }
 
     public void registerMouse(int MouseCode, Consumer<Game> consumer, MouseEventType eventType) {
-        switch (eventType) {
-            case MOVED -> mouseListeners.put(MouseCode, consumer);
+        if (Objects.requireNonNull(eventType) == MouseEventType.MOVED) {
+            mouseListeners.put(MouseCode, consumer);
         }
     }
 
@@ -56,5 +48,14 @@ public class GameScene {
         if (mouseListeners.containsKey(e.getID())) {
             mouseListeners.get(e.getID()).accept(game);
         }
+    }
+
+    public enum KeybindEventType {
+        PRESSED,
+        RELEASED
+    }
+
+    public enum MouseEventType {
+        MOVED
     }
 }

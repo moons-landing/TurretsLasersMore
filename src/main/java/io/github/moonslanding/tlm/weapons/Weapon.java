@@ -1,6 +1,9 @@
 package io.github.moonslanding.tlm.weapons;
 
-import io.github.moonslanding.tlm.engine.*;
+import io.github.moonslanding.tlm.engine.GameObject;
+import io.github.moonslanding.tlm.engine.GameWorld;
+import io.github.moonslanding.tlm.engine.Sprite;
+import io.github.moonslanding.tlm.engine.SpriteCache;
 
 public abstract class Weapon {
 

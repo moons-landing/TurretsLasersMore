@@ -1,6 +1,5 @@
 package io.github.moonslanding.tlm.weapons;
 
-import io.github.moonslanding.tlm.engine.Game;
 import io.github.moonslanding.tlm.engine.GameObject;
 import io.github.moonslanding.tlm.engine.GameWorld;
 import io.github.moonslanding.tlm.entities.PlayerShip;

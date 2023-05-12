@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 public class ResourceEntityManager {
 
+    private static ResourceEntityManager instance;
     ObjectArrayList<ResourcePickupEntity> entities = new ObjectArrayList<>();
 
     private ResourceEntityManager() {
@@ -13,8 +14,6 @@ public class ResourceEntityManager {
             entities.add(new ResourcePickupEntity(0));
         }
     }
-
-    private static ResourceEntityManager instance;
 
     public static ResourceEntityManager getInstance() {
         if (instance == null) instance = new ResourceEntityManager();

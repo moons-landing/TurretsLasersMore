@@ -2,7 +2,6 @@ package io.github.moonslanding.tlm.engine;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameWorld {

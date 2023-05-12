@@ -1,14 +1,11 @@
 package io.github.moonslanding.tlm.weapons;
 
-import io.github.moonslanding.tlm.engine.Game;
 import io.github.moonslanding.tlm.engine.GameObject;
 import io.github.moonslanding.tlm.engine.GameWorld;
 import io.github.moonslanding.tlm.entities.PlayerShip;
 import io.github.moonslanding.tlm.entities.ProjectileEntity;
 import io.github.moonslanding.tlm.entities.WeaponEntity;
 import io.github.moonslanding.tlm.managers.ProjectileManager;
-
-import java.util.Timer;
 
 public class FlakCannonWeapon extends Weapon {
 

@@ -7,17 +7,15 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-
 import java.awt.event.MouseMotionAdapter;
 
 
 public class GameView extends JPanel implements Runnable {
 
-    private final Game game;
-    private Thread drawThread;
-    private final int FPS = 60;
-
     private static Point mousePosition;
+    private final Game game;
+    private final int FPS = 60;
+    private Thread drawThread;
 
     public GameView(Game game, int width, int height) {
         super(true);
@@ -25,7 +23,7 @@ public class GameView extends JPanel implements Runnable {
         setPreferredSize(new Dimension(width, height));
         setBackground(Color.black);
         setFocusable(true);
-        this.addKeyListener(new KeyAdapter(){
+        this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (game.getCurrentScene() == null) return;
@@ -62,7 +60,7 @@ public class GameView extends JPanel implements Runnable {
     }
 
 
-    public void stopDrawThread() {  
+    public void stopDrawThread() {
         drawThread.interrupt();
         drawThread = null;
 
@@ -87,12 +85,12 @@ public class GameView extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        double drawInterval = 1000000000/FPS;
+        double drawInterval = 1000000000 / FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
 
-        while(drawThread != null) {
+        while (drawThread != null) {
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
             lastTime = currentTime;
@@ -104,17 +102,17 @@ public class GameView extends JPanel implements Runnable {
     }
 
     public int getMouseX() {
-        if (mousePosition == null) return getWidth()/2;
+        if (mousePosition == null) return getWidth() / 2;
         return mousePosition.x;
     }
 
     public int getMouseY() {
-        if (mousePosition == null) return getHeight()/2;
+        if (mousePosition == null) return getHeight() / 2;
         return mousePosition.y;
     }
 
     private void setMousePosition(Point mousePosition) {
-        this.mousePosition = mousePosition;
+        GameView.mousePosition = mousePosition;
     }
 
 //    public  void addKeyListener(new KeyAdapter(){

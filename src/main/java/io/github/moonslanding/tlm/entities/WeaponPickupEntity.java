@@ -8,14 +8,15 @@ import java.awt.*;
 
 public class WeaponPickupEntity extends GameObject implements IRenderable {
 
+    private boolean alive;
+
     public WeaponPickupEntity() {
         super(-1, -1, 5, 5);
     }
 
-    private boolean alive;
-
     @Override
-    public void render(WrappedGraphic graphics) {}
+    public void render(WrappedGraphic graphics) {
+    }
 
     public boolean isAlive() {
         return alive;

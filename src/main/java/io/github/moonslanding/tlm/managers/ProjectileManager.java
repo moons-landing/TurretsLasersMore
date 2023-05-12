@@ -5,10 +5,9 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 public class ProjectileManager {
 
+    private static ProjectileManager instance;
     ObjectArrayList<ProjectileEntity> playerProjectiles = new ObjectArrayList<>();
     ObjectArrayList<ProjectileEntity> enemyProjectiles = new ObjectArrayList<>();
-
-    private static ProjectileManager instance;
 
     private ProjectileManager() {
         int STARTING_PROJECTILES = 10000;

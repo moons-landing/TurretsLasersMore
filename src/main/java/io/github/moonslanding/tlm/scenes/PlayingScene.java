@@ -5,22 +5,19 @@ import io.github.moonslanding.tlm.camera.FollowedGameView;
 import io.github.moonslanding.tlm.engine.Game;
 import io.github.moonslanding.tlm.engine.GameScene;
 import io.github.moonslanding.tlm.entities.PlayerShip;
-import io.github.moonslanding.tlm.entities.WeaponPickupEntity;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class PlayingScene extends FollowedGameView {
 
+    private final Game game;
+    private final GameScene scene;
+    private final PlayerShip playerShip;
     private boolean movingLeft, movingRight, movingUp, movingDown;
-    private Game game;
-    private GameScene scene;
-    private PlayerShip playerShip;
     private long startTime;
 
     public PlayingScene(Game game, PlayerShip player) {
@@ -58,8 +55,8 @@ public class PlayingScene extends FollowedGameView {
                     playerShip.move(0, 1);
                 }
             }
-        }, 10, 1000/(49+playerShip.getLevel()));
- 
+        }, 10, 1000 / (49 + playerShip.getLevel()));
+
     }
 
     private void registerBindings() {

@@ -17,7 +17,8 @@ public class ResourcePickupEntity extends GameObject implements IRenderable {
     }
 
     @Override
-    public void render(WrappedGraphic graphics) {}
+    public void render(WrappedGraphic graphics) {
+    }
 
     @Override
     public void render(WrappedGraphic graphics, int x, int y) {

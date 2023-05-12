@@ -13,16 +13,14 @@ import java.util.TimerTask;
 
 public class PlayerShip extends SpritedGameObject {
 
+    // Attributes for basic turret
+    private final int baseDamage = 5;
+    private final double fireSpeed = 1.5;
+    private final ObjectArrayList<WeaponEntity> weapons = new ObjectArrayList<>();
+    private final Timer firing = new Timer();
     private int level = 1;
     private int hullCount = 10;
-
-    // Attributes for basic turret
-    private int baseDamage = 5;
-    private double fireSpeed = 1.5;
-
     private int resources = 0;
-
-    private ObjectArrayList<WeaponEntity> weapons = new ObjectArrayList<>();
 
     public PlayerShip(int spawnX, int spawnY) {
         super(spawnX, spawnY, "player_ship");
@@ -62,8 +60,6 @@ public class PlayerShip extends SpritedGameObject {
     public void setResources(int resources) {
         this.resources = resources;
     }
-
-    private Timer firing = new Timer();
 
     public void startFiring(GameWorld world) {
         firing.scheduleAtFixedRate(new TimerTask() {

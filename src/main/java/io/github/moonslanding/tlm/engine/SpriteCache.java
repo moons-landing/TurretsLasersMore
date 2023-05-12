@@ -17,7 +17,7 @@ public class SpriteCache {
     }
 
     private static void initialize() {
-        if(instance != null) return;
+        if (instance != null) return;
         instance = new SpriteCache();
     }
 

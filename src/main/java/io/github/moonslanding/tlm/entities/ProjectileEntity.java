@@ -5,30 +5,28 @@ import io.github.moonslanding.tlm.engine.WrappedGraphic;
 import io.github.moonslanding.tlm.engine.interfaces.IRenderable;
 
 import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ProjectileEntity extends GameObject implements IRenderable {
 
-    public ProjectileSide getSide() {
-        return side;
-    }
-
-    private ProjectileSide side;
-
-    public ProjectileEntity(ProjectileSide side) {
-        super(-1, -1, 3, 3);
-        this.side = side;
-    }
-
+    private final ProjectileSide side;
     private boolean alive;
     private int aliveTime;
     private int maxAliveTime;
     private int velocity;
     private int damage;
 
+    public ProjectileEntity(ProjectileSide side) {
+        super(-1, -1, 3, 3);
+        this.side = side;
+    }
+
+    public ProjectileSide getSide() {
+        return side;
+    }
+
     @Override
-    public void render(WrappedGraphic graphics) {}
+    public void render(WrappedGraphic graphics) {
+    }
 
     @Override
     public void render(WrappedGraphic graphics, int x, int y) {
@@ -38,10 +36,6 @@ public class ProjectileEntity extends GameObject implements IRenderable {
         if (side == ProjectileSide.PLAYER) g2d.setColor(Color.CYAN);
         if (side == ProjectileSide.ENEMY) g2d.setColor(Color.ORANGE);
         g2d.fillRect(x - 1, y - 1, getWidth(), getHeight());
-    }
-
-    public enum ProjectileSide {
-        PLAYER, ENEMY
     }
 
     public boolean isAlive() {
@@ -83,5 +77,9 @@ public class ProjectileEntity extends GameObject implements IRenderable {
 
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    public enum ProjectileSide {
+        PLAYER, ENEMY
     }
 }

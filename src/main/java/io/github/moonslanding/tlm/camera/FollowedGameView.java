@@ -1,6 +1,5 @@
 package io.github.moonslanding.tlm.camera;
 
-import io.github.moonslanding.tlm.TLMGame;
 import io.github.moonslanding.tlm.engine.*;
 import io.github.moonslanding.tlm.engine.interfaces.IRenderable;
 
@@ -10,13 +9,13 @@ public class FollowedGameView extends GameView {
 
     private final GameWorld world;
     private final SpritedGameObject pivotObject;
-    private Point gvThreshold;
-    private Point playerPositionInView = new Point(0,0);
+    private final Point gvThreshold;
+    private final Point playerPositionInView = new Point(0, 0);
 
     public FollowedGameView(Game game, int width, int height, SpritedGameObject pivotObject) {
         super(game, width, height);
         this.pivotObject = pivotObject;
-        if(game.getWorld() == null) {
+        if (game.getWorld() == null) {
             throw new NullPointerException("Game doesn't have an initialized GameWorld or is null");
         }
         world = game.getWorld();
@@ -26,7 +25,7 @@ public class FollowedGameView extends GameView {
     public FollowedGameView(Game game, SpritedGameObject pivotObject) {
         super(game);
         this.pivotObject = pivotObject;
-        if(game.getWorld() == null) {
+        if (game.getWorld() == null) {
             throw new NullPointerException("Game doesn't have an initialized GameWorld or is null");
         }
         world = game.getWorld();
@@ -99,9 +98,9 @@ public class FollowedGameView extends GameView {
             if (o == null) return;
             if (o == pivotObject) return;
             if (o.getX() < viewCenter.x - (gvThreshold.x + maxOffset)
-            || o.getX() > viewCenter.x + (gvThreshold.x + maxOffset)
-            || o.getY() < viewCenter.y - (gvThreshold.y + maxOffset)
-            || o.getY() > viewCenter.y + (gvThreshold.y + maxOffset)) return;
+                    || o.getX() > viewCenter.x + (gvThreshold.x + maxOffset)
+                    || o.getY() < viewCenter.y - (gvThreshold.y + maxOffset)
+                    || o.getY() > viewCenter.y + (gvThreshold.y + maxOffset)) return;
             if (o instanceof IRenderable) {
                 Point objectCoords = new Point(o.getX(), o.getY());
                 int dx = objectCoords.x - viewCenter.x;

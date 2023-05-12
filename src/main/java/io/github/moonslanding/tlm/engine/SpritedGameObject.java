@@ -66,7 +66,7 @@ public class SpritedGameObject extends GameObject implements IRenderable {
         return img;
     }
 
-    private int[] getnewImgResolution(BufferedImage source, int zoomFactor){
+    private int[] getnewImgResolution(BufferedImage source, int zoomFactor) {
         // return Width and height of image after zooming
         int newImgWidth = source.getWidth() * zoomFactor;
         int newImgHeight = source.getHeight() * zoomFactor;
@@ -74,18 +74,18 @@ public class SpritedGameObject extends GameObject implements IRenderable {
         return new int[]{newImgWidth, newImgHeight};
     }
 
-    private int[] getrotatedResolution(int h, int w, double deg){
+    private int[] getrotatedResolution(int h, int w, double deg) {
         // return Width and height of image
         double sin = Math.abs(Math.sin(Math.toRadians(deg))),
                 cos = Math.abs(Math.cos(Math.toRadians(deg)));
 
-        int newW = (int) Math.floor(w *cos + h*sin);
-        int newH = (int) Math.floor(h*cos + w*sin);
+        int newW = (int) Math.floor(w * cos + h * sin);
+        int newH = (int) Math.floor(h * cos + w * sin);
 
         return new int[]{newW, newH};
     }
 
-    public BufferedImage rotate(BufferedImage source, double deg){
+    public BufferedImage rotate(BufferedImage source, double deg) {
 
         int[] newRotatedRes = getrotatedResolution(source.getHeight(), source.getWidth(), deg);
 
@@ -95,21 +95,21 @@ public class SpritedGameObject extends GameObject implements IRenderable {
         BufferedImage img = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = img.createGraphics();
 
-        g.translate((newW-source.getWidth())/2, (newH-source.getHeight())/2);
-        g.rotate(Math.toRadians(deg), source.getWidth()/2, source.getHeight()/2);
+        g.translate((newW - source.getWidth()) / 2, (newH - source.getHeight()) / 2);
+        g.rotate(Math.toRadians(deg), source.getWidth() / 2, source.getHeight() / 2);
         g.drawRenderedImage(source, null);
         g.dispose();
 
         return img;
     }
 
-    public void setFacingto(int playerX, int playerY, int x, int y){
+    public void setFacingto(int playerX, int playerY, int x, int y) {
         double angle = Math.atan2(y - playerY, x - playerX);
         setFacing(Math.toDegrees(angle));
     }
 
 
-    private BufferedImage createGraphic(BufferedImage source, WrappedGraphic graphics){
+    private BufferedImage createGraphic(BufferedImage source, WrappedGraphic graphics) {
 
         int[] newImgRes = getnewImgResolution(source, graphics.getZoomFactor());
 

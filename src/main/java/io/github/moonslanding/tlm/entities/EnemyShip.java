@@ -10,15 +10,10 @@ import java.util.Random;
 
 public class EnemyShip extends SpritedGameObject {
 
+    private final PlayerShip target;
     private int health = 10;
     private double speed = 1.5;
-
-    public WeaponEntity getWeapon() {
-        return weapon;
-    }
-
     private WeaponEntity weapon = null;
-    private PlayerShip target;
 
     public EnemyShip(int spawnX, int spawnY, String spriteName, PlayerShip target) {
         super(spawnX, spawnY, spriteName);
@@ -26,6 +21,10 @@ public class EnemyShip extends SpritedGameObject {
         this.target = target;
         setWidth(getWidth() + 2);
         setHeight(getHeight() + 2);
+    }
+
+    public WeaponEntity getWeapon() {
+        return weapon;
     }
 
     @Override
@@ -37,7 +36,7 @@ public class EnemyShip extends SpritedGameObject {
 
     public void moveTowardsTarget() {
         setFacingto(getX(), getY(), target.getX(), target.getY());
-        if (Math.sqrt(Math.abs(target.getX() - getX())^2 + Math.abs(target.getY() - getY())^2) > 10)
+        if (Math.sqrt(Math.abs(target.getX() - getX()) ^ 2 + Math.abs(target.getY() - getY()) ^ 2) > 10)
             move(
                     (int) (getSpeed() * Math.cos(Math.toRadians(getFacing()))),
                     (int) (getSpeed() * Math.sin(Math.toRadians(getFacing())))
@@ -45,7 +44,9 @@ public class EnemyShip extends SpritedGameObject {
     }
 
     public void destroy(GameWorld world) {
-        if (weapon != null) { weapon.destroy(); }
+        if (weapon != null) {
+            weapon.destroy();
+        }
         world.removeObject(weapon);
         world.removeObject(this);
         Random rand = new Random();

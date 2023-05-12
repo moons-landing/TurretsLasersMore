@@ -16,26 +16,25 @@ import java.util.TimerTask;
 public class TLMWorld extends GameWorld {
 
 
-    private int enemyThreshold = 50;
-    private int enemyCount = 0;
-    private long startTime;
-
-    public long getCurrentScore() {
-        return currentScore;
-    }
-
-    private long currentScore;
-    private boolean gameOver;
-
-    private ObjectArrayList<Weapon> weapons = new ObjectArrayList<>(new Weapon[]{
+    private final ObjectArrayList<Weapon> weapons = new ObjectArrayList<>(new Weapon[]{
             new TurretWeapon(),
             new RailgunWeapon(),
             new FlakCannonWeapon()
     });
+    Random rand = new Random();
+    private int enemyThreshold = 50;
+    private int enemyCount = 0;
+    private long startTime;
+    private long currentScore;
+    private boolean gameOver;
 
     public TLMWorld(int width, int height) {
         super(width, height);
         startUpdating();
+    }
+
+    public long getCurrentScore() {
+        return currentScore;
     }
 
     private void startUpdating() {
@@ -49,21 +48,25 @@ public class TLMWorld extends GameWorld {
                 collisionCheck();
                 if (!gameOver) currentScore = (System.currentTimeMillis() - startTime) / 1000;
                 if (gameOver) {
-                    while (true);
+                    while (true) ;
                 }
             }
-        }, 10L, 1000/60);
+        }, 10L, 1000 / 60);
     }
 
     private void processProjectiles() {
         getObjects().forEach(o -> {
             if (o == null) return;
             if (o instanceof ProjectileEntity proj) {
-                if (!proj.isAlive()) { removeObject(proj); return; }
+                if (!proj.isAlive()) {
+                    removeObject(proj);
+                    return;
+                }
                 if (proj.isAlive() && proj.getMaxAliveTime() <= proj.getAliveTime()) {
                     proj.setAlive(false);
                 }
-                if (proj.isAlive() && (proj.getX() < 0 || proj.getX() > getWidth() || proj.getY() < 0 || proj.getY() > getHeight())) proj.setAlive(false);
+                if (proj.isAlive() && (proj.getX() < 0 || proj.getX() > getWidth() || proj.getY() < 0 || proj.getY() > getHeight()))
+                    proj.setAlive(false);
                 if (proj.isAlive() && proj.getMaxAliveTime() > proj.getAliveTime()) {
                     proj.move((int) (proj.getVelocity() * Math.cos(Math.toRadians(proj.getFacing()))),
                             (int) (proj.getVelocity() * Math.sin(Math.toRadians(proj.getFacing()))));
@@ -146,8 +149,6 @@ public class TLMWorld extends GameWorld {
             }
         });
     }
-
-    Random rand = new Random();
 
     public void startSpawningEnemies(PlayerShip player) {
         new Timer().scheduleAtFixedRate(new TimerTask() {
