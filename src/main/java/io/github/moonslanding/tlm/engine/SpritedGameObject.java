@@ -95,8 +95,6 @@ public class SpritedGameObject extends GameObject implements IRenderable {
         BufferedImage img = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = img.createGraphics();
 
-        System.out.println(getFacing());
-
         g.translate((newW-source.getWidth())/2, (newH-source.getHeight())/2);
         g.rotate(Math.toRadians(deg), source.getWidth()/2, source.getHeight()/2);
         g.drawRenderedImage(source, null);
@@ -104,6 +102,14 @@ public class SpritedGameObject extends GameObject implements IRenderable {
 
         return img;
     }
+
+    public void setFacingto(int playerX, int playerY, int x, int y){
+        System.out.println("x: " + x + " y: " + y);
+        System.out.println("getX(): " + getX() + " getY(): " + getY());
+        double angle = Math.atan2(y - playerY, x - playerX);
+        setFacing(Math.toDegrees(angle));
+    }
+
 
     private BufferedImage createGraphic(BufferedImage source, WrappedGraphic graphics){
 

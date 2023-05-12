@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'it.unimi.dsi:fastutil-core:8.5.12'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
 }
 
