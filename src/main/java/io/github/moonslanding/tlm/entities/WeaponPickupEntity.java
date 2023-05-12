@@ -9,7 +9,7 @@ import java.awt.*;
 public class WeaponPickupEntity extends GameObject implements IRenderable {
 
     public WeaponPickupEntity() {
-        super(-1, -1, 3, 3);
+        super(-1, -1, 5, 5);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class WeaponPickupEntity extends GameObject implements IRenderable {
         Graphics g = graphics.getGraphic();
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(Color.MAGENTA);
-        g2d.fillRect(x - 1, y - 1, getWidth(), getHeight());
+        g2d.fillRect(x - 2, y - 2, getWidth(), getHeight());
         g2d.dispose();
     }
 

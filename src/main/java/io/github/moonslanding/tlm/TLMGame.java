@@ -9,11 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class TLMGame {
 
-    private static GameWorld world = new GameWorld(2000,2000 );
+    private static TLMWorld world = new TLMWorld(2000,2000 );
     private static Game game = new Game(world);
     private static GameView gui;
     private static JFrame window = new JFrame();
@@ -28,6 +29,11 @@ public class TLMGame {
         window.setResizable(false);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setVisible(true);
+        window.setCursor(window.getToolkit().createCustomCursor(
+                new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB),
+                new Point(),
+                null
+        ));
 
         gui.startDrawThread();
         start(game);
@@ -40,6 +46,7 @@ public class TLMGame {
         PlayingScene playingScene = new PlayingScene(game, player);
         changeView(playingScene);
         game.setCurrentScene(playingScene.getControlScene());
+        player.startFiring(game);
     }
 
     private static void changeView(GameView view) {

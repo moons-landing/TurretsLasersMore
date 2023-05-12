@@ -8,12 +8,13 @@ import io.github.moonslanding.tlm.entities.PlayerShip;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class PlayingScene extends FollowedGameView {
 
-    private boolean movingLeft, movingRight, movingUp, movingDown, rotateClockwise, rotateCounterclockwise;
+    private boolean movingLeft, movingRight, movingUp, movingDown;
     private Game game;
     private GameScene scene;
     private PlayerShip playerShip;
@@ -69,12 +70,6 @@ public class PlayingScene extends FollowedGameView {
         scene.registerKeybind(KeyEvent.VK_S, (g) -> movingDown = false, GameScene.KeybindEventType.RELEASED);
         scene.registerKeybind(KeyEvent.VK_D, (g) -> movingRight = true, GameScene.KeybindEventType.PRESSED);
         scene.registerKeybind(KeyEvent.VK_D, (g) -> movingRight = false, GameScene.KeybindEventType.RELEASED);
-
-        // Temporary rotation solution with keybinds.
-        scene.registerKeybind(KeyEvent.VK_Q, (g) -> rotateCounterclockwise = true, GameScene.KeybindEventType.PRESSED);
-        scene.registerKeybind(KeyEvent.VK_Q, (g) -> rotateCounterclockwise = false, GameScene.KeybindEventType.RELEASED);
-        scene.registerKeybind(KeyEvent.VK_E, (g) -> rotateClockwise = true, GameScene.KeybindEventType.PRESSED);
-        scene.registerKeybind(KeyEvent.VK_E, (g) -> rotateClockwise = false, GameScene.KeybindEventType.RELEASED);
     }
 
     @Override
@@ -82,5 +77,8 @@ public class PlayingScene extends FollowedGameView {
         super.renderOnCanvas(g);
         g.setColor(Color.white);
         g.drawString(playerShip.getX() + "," + playerShip.getY(), 50, 50);
+
+        g.drawLine(getMouseX() - 5, getMouseY(), getMouseX() + 5, getMouseY());
+        g.drawLine(getMouseX(), getMouseY() - 5, getMouseX(), getMouseY() + 5);
     }
 }

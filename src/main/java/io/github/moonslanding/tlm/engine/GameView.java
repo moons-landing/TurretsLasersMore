@@ -28,17 +28,20 @@ public class GameView extends JPanel implements Runnable {
         this.addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e) {
+                if (game.getCurrentScene() == null) return;
                 game.getCurrentScene().onKeyPressed(e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
+                if (game.getCurrentScene() == null) return;
                 game.getCurrentScene().onKeyReleased(e);
             }
         });
         this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
+                if (game.getCurrentScene() == null) return;
                 if (mousePosition == null) {
                     mousePosition = new Point(e.getX(), e.getY());
                 }
@@ -101,10 +104,12 @@ public class GameView extends JPanel implements Runnable {
     }
 
     public int getMouseX() {
+        if (mousePosition == null) return getWidth()/2;
         return mousePosition.x;
     }
 
     public int getMouseY() {
+        if (mousePosition == null) return getHeight()/2;
         return mousePosition.y;
     }
 

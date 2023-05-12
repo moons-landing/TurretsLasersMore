@@ -11,7 +11,7 @@ public class ResourcePickupEntity extends GameObject implements IRenderable {
     private int amount;
 
     public ResourcePickupEntity(int amount) {
-        super(-1, -1, 1, 1);
+        super(-1, -1, 3, 3);
         this.amount = amount;
     }
 
@@ -24,7 +24,7 @@ public class ResourcePickupEntity extends GameObject implements IRenderable {
         Graphics g = graphics.getGraphic();
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(x, y, getWidth(), getHeight());
+        g2d.fillRect(x - 1, y - 1, getWidth(), getHeight());
         g2d.dispose();
     }
 
