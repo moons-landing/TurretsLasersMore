@@ -31,4 +31,8 @@ public class ResourcePickupEntity extends GameObject implements IRenderable {
     public int getResourceAmount() {
         return amount;
     }
+
+    public void setResourceAmount(int amount) {
+        this.amount = amount;
+    }
 }
