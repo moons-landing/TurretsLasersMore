@@ -1,14 +1,17 @@
 package io.github.moonslanding.tlm;
 
-import io.github.moonslanding.tlm.camera.FollowedGameView;
 import io.github.moonslanding.tlm.engine.*;
+import io.github.moonslanding.tlm.entities.EnemyShip;
 import io.github.moonslanding.tlm.entities.PlayerShip;
+import io.github.moonslanding.tlm.entities.WeaponEntity;
 import io.github.moonslanding.tlm.scenes.PlayingScene;
+import io.github.moonslanding.tlm.weapons.FlakCannonWeapon;
+import io.github.moonslanding.tlm.weapons.RailgunWeapon;
+import io.github.moonslanding.tlm.weapons.TurretWeapon;
+import io.github.moonslanding.tlm.weapons.Weapon;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -43,10 +46,12 @@ public class TLMGame {
         PlayerShip player = new PlayerShip(game.getWorld().getWidth() / 2, game.getWorld().getHeight() / 2);
         game.getWorld().addObject(player);
 
+        world.startSpawningEnemies(player);
+
         PlayingScene playingScene = new PlayingScene(game, player);
         changeView(playingScene);
         game.setCurrentScene(playingScene.getControlScene());
-        player.startFiring(game);
+        player.startFiring(game.getWorld());
     }
 
     private static void changeView(GameView view) {

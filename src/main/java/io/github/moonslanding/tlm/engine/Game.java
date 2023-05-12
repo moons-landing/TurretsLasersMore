@@ -21,7 +21,6 @@ public class Game {
         this.world = world;
     }
 
-
     public GameScene getCurrentScene() {
         return currentScene;
     }

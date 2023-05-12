@@ -12,12 +12,22 @@ public class WeaponPickupEntity extends GameObject implements IRenderable {
         super(-1, -1, 5, 5);
     }
 
+    private boolean alive;
+
     @Override
     public void render(WrappedGraphic graphics) {}
 
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
     @Override
     public void render(WrappedGraphic graphics, int x, int y) {
-        if (getX() < 0 && getY() < 0) return;
+        if (!alive) return;
         Graphics g = graphics.getGraphic();
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(Color.MAGENTA);
