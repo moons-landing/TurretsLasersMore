@@ -1,6 +1,7 @@
 plugins {
     id 'application'
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 java {
@@ -14,7 +15,7 @@ application {
 }
 
 // Semantic versioning
-version = '0.2.0'
+version = '1.0.0'
 
 // Dependencies
 repositories {
@@ -28,4 +29,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+shadowJar {
+
 }
