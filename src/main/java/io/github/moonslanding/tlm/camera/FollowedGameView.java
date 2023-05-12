@@ -83,7 +83,7 @@ public class FollowedGameView extends GameView {
             }
         }
 
-        pivotObject.render(wg, x, y);
+        if (world.getObjects().contains(pivotObject)) pivotObject.render(wg, x, y);
         playerPositionInView.x = x;
         playerPositionInView.y = y;
         renderObjectsInFoV(g, 50, viewCenter);
@@ -96,6 +96,7 @@ public class FollowedGameView extends GameView {
         WrappedGraphic wg = new WrappedGraphic(g2d, zoom);
 
         world.getObjects().forEach((o) -> {
+            if (o == null) return;
             if (o == pivotObject) return;
             if (o.getX() < viewCenter.x - (gvThreshold.x + maxOffset)
             || o.getX() > viewCenter.x + (gvThreshold.x + maxOffset)

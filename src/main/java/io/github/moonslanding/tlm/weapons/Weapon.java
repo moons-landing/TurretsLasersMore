@@ -1,13 +1,11 @@
 package io.github.moonslanding.tlm.weapons;
 
-import io.github.moonslanding.tlm.engine.Game;
-import io.github.moonslanding.tlm.engine.GameObject;
-import io.github.moonslanding.tlm.engine.Sprite;
-import io.github.moonslanding.tlm.engine.SpriteCache;
+import io.github.moonslanding.tlm.engine.*;
 
 public abstract class Weapon {
 
     private final String name;
+    private final String spriteName;
     private final Sprite sprite;
 
     private int damage;
@@ -15,6 +13,7 @@ public abstract class Weapon {
 
     public Weapon(String name, String spriteName, int damage, int cooldown) {
         this.name = name;
+        this.spriteName = spriteName;
         sprite = SpriteCache.loadSprite(spriteName);
         this.damage = damage;
         this.cooldown = cooldown;
@@ -26,6 +25,10 @@ public abstract class Weapon {
 
     public Sprite getSprite() {
         return sprite;
+    }
+
+    public String getSpriteName() {
+        return spriteName;
     }
 
     public int getDamage() {
@@ -44,6 +47,6 @@ public abstract class Weapon {
         this.cooldown = cooldown;
     }
 
-    public abstract void shoot(Game game, GameObject source);
+    public abstract void shoot(GameWorld world, GameObject source);
 
 }

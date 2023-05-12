@@ -10,6 +10,10 @@ import java.util.TimerTask;
 
 public class ProjectileEntity extends GameObject implements IRenderable {
 
+    public ProjectileSide getSide() {
+        return side;
+    }
+
     private ProjectileSide side;
 
     public ProjectileEntity(ProjectileSide side) {
@@ -21,6 +25,7 @@ public class ProjectileEntity extends GameObject implements IRenderable {
     private int aliveTime;
     private int maxAliveTime;
     private int velocity;
+    private int damage;
 
     @Override
     public void render(WrappedGraphic graphics) {}
@@ -70,5 +75,13 @@ public class ProjectileEntity extends GameObject implements IRenderable {
 
     public void setVelocity(int velocity) {
         this.velocity = velocity;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 }

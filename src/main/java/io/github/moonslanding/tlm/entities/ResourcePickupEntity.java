@@ -9,6 +9,7 @@ import java.awt.*;
 public class ResourcePickupEntity extends GameObject implements IRenderable {
 
     private int amount;
+    private boolean alive;
 
     public ResourcePickupEntity(int amount) {
         super(-1, -1, 3, 3);
@@ -20,7 +21,7 @@ public class ResourcePickupEntity extends GameObject implements IRenderable {
 
     @Override
     public void render(WrappedGraphic graphics, int x, int y) {
-        if (getX() < 0 && getY() < 0) return;
+        if (!alive) return;
         Graphics g = graphics.getGraphic();
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(Color.WHITE);
@@ -34,5 +35,13 @@ public class ResourcePickupEntity extends GameObject implements IRenderable {
 
     public void setResourceAmount(int amount) {
         this.amount = amount;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }
