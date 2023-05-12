@@ -1,5 +1,7 @@
 package io.github.moonslanding.tlm.engine;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public class GameWorld {
 
     private final int width;
     private final int height;
-    private final List<GameObject> objects = new ArrayList<>();
+    private final ObjectArrayList<GameObject> objects = new ObjectArrayList<>();
 
     public GameWorld(int width, int height) {
         this.width = width;

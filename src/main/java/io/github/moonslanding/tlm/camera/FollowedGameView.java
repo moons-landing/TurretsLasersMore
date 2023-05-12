@@ -11,6 +11,7 @@ public class FollowedGameView extends GameView {
     private final GameWorld world;
     private final SpritedGameObject pivotObject;
     private Point gvThreshold;
+    private Point playerPositionInView = new Point(0,0);
 
     public FollowedGameView(Game game, int width, int height, SpritedGameObject pivotObject) {
         super(game, width, height);
@@ -83,6 +84,8 @@ public class FollowedGameView extends GameView {
         }
 
         pivotObject.render(wg, x, y);
+        playerPositionInView.x = x;
+        playerPositionInView.y = y;
         renderObjectsInFoV(g, 50, viewCenter);
         g2d.dispose();
     }
@@ -122,4 +125,7 @@ public class FollowedGameView extends GameView {
         return new Point(this.getPreferredSize().width / 2, this.getPreferredSize().height / 2);
     }
 
+    public Point getPlayerPositionInView() {
+        return playerPositionInView;
+    }
 }

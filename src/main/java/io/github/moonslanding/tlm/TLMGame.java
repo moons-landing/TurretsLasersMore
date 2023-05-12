@@ -2,6 +2,8 @@ package io.github.moonslanding.tlm;
 
 import io.github.moonslanding.tlm.camera.FollowedGameView;
 import io.github.moonslanding.tlm.engine.*;
+import io.github.moonslanding.tlm.entities.PlayerShip;
+import io.github.moonslanding.tlm.scenes.PlayingScene;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +13,6 @@ import java.util.Random;
 
 public class TLMGame {
 
-    private static final Sprite playerShipSprite = SpriteCache.loadSprite("player_ship");
     private static GameWorld world = new GameWorld(2000,2000 );
     private static Game game = new Game(world);
     private static GameView gui;
@@ -28,64 +29,18 @@ public class TLMGame {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setVisible(true);
 
-
         gui.startDrawThread();
-        testFollow(game);
+        start(game);
     }
 
-    private static void testFollow(Game game) {
-        SpritedGameObject player = new SpritedGameObject(
-                world.getWidth() / 2,
-                world.getHeight() / 2,
-                "player_ship"
-        );
+    private static void start(Game game) {
+        PlayerShip player = new PlayerShip(game.getWorld().getWidth() / 2, game.getWorld().getHeight() / 2);
+        game.getWorld().addObject(player);
 
-
-        world.addObject(player);
-        player.setTint(Color.CYAN);
-
-        Random rand = new Random();
-        for (int i = 0; i < 100; i++) {
-            world.addObject(new SpritedGameObject(
-                    rand.nextInt(0, world.getWidth()),
-                    rand.nextInt(0, world.getHeight()),
-                    "player_ship"
-            ));
-        }
-
-        GameScene followScene = new GameScene(game);
-        followScene.registerMouse(MouseEvent.MOUSE_MOVED, (g) -> {
-            player.setFacingto(gui.getMouseX(), gui.getMouseY());
-        }, GameScene.MouseEventType.MOVED);
-//        followScene.registerKeybind(KeyEvent.VK_Q, (g) -> {
-//            System.out.println("Q Presses");
-//            // yellowShip.rotate(................)
-//            // rotate in counterclockwise direction
-//            player.setFacing(player.getFacing()-10);
-//        }, GameScene.KeybindEventType.PRESSED);
-//        followScene.registerKeybind(KeyEvent.VK_E, (g) -> {
-//            System.out.println("E Presses");
-//            // yellowShip.rotate(.................)
-//            // rotate in clockwise direction
-//            player.setFacing(player.getFacing()+10);
-//        }, GameScene.KeybindEventType.PRESSED);
-        followScene.registerKeybind(KeyEvent.VK_W, (g) -> {
-            player.move(0, -10);
-        }, GameScene.KeybindEventType.PRESSED);
-        followScene.registerKeybind(KeyEvent.VK_S, (g) -> {
-            player.move(0, 10);
-        }, GameScene.KeybindEventType.PRESSED);
-        followScene.registerKeybind(KeyEvent.VK_A, (g) -> {
-            player.move(-10, 0);
-        }, GameScene.KeybindEventType.PRESSED);
-        followScene.registerKeybind(KeyEvent.VK_D, (g) -> {
-            player.move(10, 0);
-        }, GameScene.KeybindEventType.PRESSED);
-        game.setCurrentScene(followScene);
-
-        changeView(new FollowedGameView(game, player));
+        PlayingScene playingScene = new PlayingScene(game, player);
+        changeView(playingScene);
+        game.setCurrentScene(playingScene.getControlScene());
     }
-
 
     private static void changeView(GameView view) {
         gui.stopDrawThread();
