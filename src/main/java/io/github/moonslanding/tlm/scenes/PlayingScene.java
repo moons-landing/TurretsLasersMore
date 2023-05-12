@@ -7,6 +7,7 @@ import io.github.moonslanding.tlm.entities.PlayerShip;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,22 +53,14 @@ public class PlayingScene extends FollowedGameView {
                 }
             }
         }, 10, 1000/(49+playerShip.getSpeed()));
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                if (rotateClockwise && !rotateCounterclockwise) {
-                    if (playerShip.getFacing() + 2 >= 360) playerShip.setFacing(0);
-                    else playerShip.setFacing(playerShip.getFacing() + 1);
-                }
-                if (rotateCounterclockwise && !rotateClockwise) {
-                    if (playerShip.getFacing() - 2 <= -1) playerShip.setFacing(359);
-                    else playerShip.setFacing(playerShip.getFacing() - 1);
-                }
-            }
-        }, 10, 5);
+ 
     }
 
     private void registerBindings() {
+        // followScene.registerMouse(MouseEvent.MOUSE_MOVED, (g) -> {
+        //     player.setFacingto(gui.getMouseX(), gui.getMouseY());
+        // }, GameScene.MouseEventType.MOVED);
+        scene.registerMouse(MouseEvent.MOUSE_MOVED, (g) -> playerShip.setFacingto((int) getPlayerPositionInView().getX(), (int) getPlayerPositionInView().getY(), getMouseX(), getMouseY()), GameScene.MouseEventType.MOVED);
         scene.registerKeybind(KeyEvent.VK_W, (g) -> movingUp = true, GameScene.KeybindEventType.PRESSED);
         scene.registerKeybind(KeyEvent.VK_W, (g) -> movingUp = false, GameScene.KeybindEventType.RELEASED);
         scene.registerKeybind(KeyEvent.VK_A, (g) -> movingLeft = true, GameScene.KeybindEventType.PRESSED);
