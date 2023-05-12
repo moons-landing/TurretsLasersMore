@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 
 public class GameView extends JPanel implements Runnable {
@@ -13,6 +15,8 @@ public class GameView extends JPanel implements Runnable {
     private final Game game;
     private Thread drawThread;
     private final int FPS = 60;
+
+    private static Point mousePosition;
 
     public GameView(Game game, int width, int height) {
         super(true);
@@ -29,6 +33,16 @@ public class GameView extends JPanel implements Runnable {
             @Override
             public void keyReleased(KeyEvent e) {
                 game.getCurrentScene().onKeyReleased(e);
+            }
+        });
+        this.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                if (mousePosition == null) {
+                    mousePosition = new Point(e.getX(), e.getY());
+                }
+                mousePosition.x = e.getX();
+                mousePosition.y = e.getY();
             }
         });
     }
@@ -53,6 +67,7 @@ public class GameView extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         renderOnCanvas(g);
+        System.out.println(mousePosition);
     }
 
     public void renderOnCanvas(Graphics g) {

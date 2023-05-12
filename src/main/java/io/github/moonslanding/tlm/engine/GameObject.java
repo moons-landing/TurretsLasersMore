@@ -26,6 +26,10 @@ public class GameObject {
         y += dy;
     }
 
+    public void relocate(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     public int getWidth() {
         return width;
