@@ -44,6 +44,7 @@ public class GameView extends JPanel implements Runnable {
                 }
                 mousePosition.x = e.getX();
                 mousePosition.y = e.getY();
+                game.getCurrentScene().onMouseMoved(e);
             }
         });
     }
@@ -68,7 +69,6 @@ public class GameView extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         renderOnCanvas(g);
-        System.out.println(mousePosition);
     }
 
     public void renderOnCanvas(Graphics g) {
@@ -100,13 +100,17 @@ public class GameView extends JPanel implements Runnable {
         }
     }
 
-    // public int getMouseX() {
-    //     return mouseX;
-    // }
+    public int getMouseX() {
+        return mousePosition.x;
+    }
 
-    // public int getMouseY() {
-    //     return mouseY;
-    // }
+    public int getMouseY() {
+        return mousePosition.y;
+    }
+
+    private void setMousePosition(Point mousePosition) {
+        this.mousePosition = mousePosition;
+    }
 
 //    public  void addKeyListener(new KeyAdapter(){
 //        @Override

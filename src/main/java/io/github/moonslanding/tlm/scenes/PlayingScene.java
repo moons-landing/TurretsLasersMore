@@ -60,7 +60,7 @@ public class PlayingScene extends FollowedGameView {
         // followScene.registerMouse(MouseEvent.MOUSE_MOVED, (g) -> {
         //     player.setFacingto(gui.getMouseX(), gui.getMouseY());
         // }, GameScene.MouseEventType.MOVED);
-        scene.registerMouse(MouseEvent.MOUSE_MOVED, (g) -> playerShip.setFacingto(getMouseX(), getMouseY()), GameScene.MouseEventType.MOVED);
+        scene.registerMouse(MouseEvent.MOUSE_MOVED, (g) -> playerShip.setFacingto((int) getPlayerPositionInView().getX(), (int) getPlayerPositionInView().getY(), getMouseX(), getMouseY()), GameScene.MouseEventType.MOVED);
         scene.registerKeybind(KeyEvent.VK_W, (g) -> movingUp = true, GameScene.KeybindEventType.PRESSED);
         scene.registerKeybind(KeyEvent.VK_W, (g) -> movingUp = false, GameScene.KeybindEventType.RELEASED);
         scene.registerKeybind(KeyEvent.VK_A, (g) -> movingLeft = true, GameScene.KeybindEventType.PRESSED);

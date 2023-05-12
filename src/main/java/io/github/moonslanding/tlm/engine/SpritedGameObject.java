@@ -103,8 +103,10 @@ public class SpritedGameObject extends GameObject implements IRenderable {
         return img;
     }
 
-    public void setFacingto(int x, int y){
-        double angle = Math.atan2(y - getY(), x - getX());
+    public void setFacingto(int playerX, int playerY, int x, int y){
+        System.out.println("x: " + x + " y: " + y);
+        System.out.println("getX(): " + getX() + " getY(): " + getY());
+        double angle = Math.atan2(y - playerY, x - playerX);
         setFacing(Math.toDegrees(angle));
     }
 
